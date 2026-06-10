@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  /* MalkiatX palette: deep emerald (trust), gold (wealth), cream (warmth) */
+  --color-night: #062019;
+  --color-night-2: #0a2f24;
+  --color-night-3: #104434;
+  --color-emerald: #0e6b4f;
+  --color-emerald-bright: #2e9e78;
+  --color-mint: #a8d8c4;
+  --color-gold: #c9a24b;
+  --color-gold-bright: #e7c878;
+  --color-gold-soft: #f5e7c4;
+  --color-cream: #faf6ed;
+  --color-sand: #f1e9d9;
+  --color-line: #e4dcc8;
+  --color-ink: #15211b;
+  --color-ink-soft: #54655c;
+
+  /* Asset class colors */
+  --color-a-property: #3fa7a0;
+  --color-a-gold: #d9ad4f;
+  --color-a-sukuk: #5fbf8c;
+  --color-a-equities: #7e9be0;
+
+  --shadow-card: 0 1px 2px rgb(20 33 27 / 0.04), 0 14px 36px -14px rgb(20 33 27 / 0.18);
+  --shadow-glow: 0 0 60px -12px rgb(201 162 75 / 0.5);
+
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+}
+
+/* Font tokens reference next/font runtime variables, so they must be inline. */
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-urdu: var(--font-noto-urdu), "Noto Nastaliq Urdu", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgb(201 162 75 / 0.35);
+}
+
+[id] {
+  scroll-margin-top: 96px;
+}
+
+/* ---------------------------------------------------------------------------
+   Urdu mode (html[lang="ur"]) — Nastaliq needs taller lines and no tracking.
+--------------------------------------------------------------------------- */
+html[lang="ur"] {
+  font-size: 17px;
+}
+html[lang="ur"] body,
+html[lang="ur"] .font-display,
+html[lang="ur"] .font-sans {
+  font-family: var(--font-noto-urdu), "Noto Nastaliq Urdu", serif;
+}
+html[lang="ur"] * {
+  letter-spacing: 0 !important;
+}
+html[lang="ur"] p,
+html[lang="ur"] li,
+html[lang="ur"] dd,
+html[lang="ur"] blockquote {
+  line-height: 2.1;
+}
+html[lang="ur"] h1,
+html[lang="ur"] h2,
+html[lang="ur"] h3,
+html[lang="ur"] h4 {
+  line-height: 1.85;
+}
+html[lang="ur"] .hero-h1 {
+  font-size: clamp(2.1rem, 5.5vw, 3.6rem) !important;
+  line-height: 1.9 !important;
+}
+html[lang="ur"] .btn {
+  padding-top: 0.45rem;
+  padding-bottom: 0.85rem;
+  line-height: 1.9;
+}
+
+/* Keep charts/numbers left-to-right inside RTL layouts */
+.ltr-isolate {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* ---------------------------------------------------------------------------
+   Components
+--------------------------------------------------------------------------- */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200;
+  }
+  .btn-gold {
+    @apply bg-gold text-night hover:bg-gold-bright hover:shadow-glow active:scale-[0.98];
+  }
+  .btn-emerald {
+    @apply bg-emerald text-cream hover:bg-night-3 active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply border border-ink/25 text-ink hover:border-emerald hover:text-emerald;
+  }
+  .btn-outline-light {
+    @apply border border-cream/30 text-cream hover:border-gold-bright hover:text-gold-bright;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-white/70 shadow-card;
+  }
+  .card-dark {
+    @apply rounded-2xl border border-white/10 bg-white/[0.045];
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.22em] text-emerald;
+  }
+  .eyebrow-light {
+    @apply text-xs font-bold uppercase tracking-[0.22em] text-gold-bright;
+  }
+}
+
+html[lang="ur"] .eyebrow,
+html[lang="ur"] .eyebrow-light {
+  @apply text-sm tracking-normal;
+}
+
+/* ---------------------------------------------------------------------------
+   Range sliders
+--------------------------------------------------------------------------- */
+input[type="range"].slider {
+  @apply h-1.5 w-full cursor-pointer appearance-none rounded-full bg-sand outline-none;
+  background-image: linear-gradient(var(--color-emerald), var(--color-emerald));
+  background-repeat: no-repeat;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgb(20 33 27 / 0.35);
+}
+input[type="range"].slider::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: var(--color-gold);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgb(20 33 27 / 0.35);
+}
