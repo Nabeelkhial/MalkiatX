@@ -148,6 +148,92 @@ html[lang="ur"] .eyebrow-light {
 }
 
 /* ---------------------------------------------------------------------------
+   Hand-crafted icon micro-animations
+--------------------------------------------------------------------------- */
+@keyframes icon-pulse {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+@keyframes icon-shimmer {
+  0% { transform: translateX(-7px); }
+  55%, 100% { transform: translateX(27px); }
+}
+@keyframes icon-seal {
+  to { transform: rotate(360deg); }
+}
+@keyframes icon-drawline {
+  0% { stroke-dashoffset: 100; }
+  45%, 82% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes icon-spark {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.18); }
+}
+.icon-win { animation: icon-pulse 2.8s ease-in-out infinite; }
+.icon-shimmer { animation: icon-shimmer 3.4s ease-in-out infinite; }
+.icon-seal { transform-box: fill-box; transform-origin: center; animation: icon-seal 14s linear infinite; }
+.icon-drawline { stroke-dasharray: 100; animation: icon-drawline 6s ease-in-out infinite; }
+.icon-spark { transform-box: fill-box; transform-origin: center; animation: icon-spark 2.6s ease-in-out infinite; }
+
+/* ---------------------------------------------------------------------------
+   Silsila ledger ribbon (blockchain ticker)
+--------------------------------------------------------------------------- */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 52s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+@keyframes chain-dot {
+  0% { left: 0; opacity: 0; }
+  18% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { left: calc(100% - 6px); opacity: 0; }
+}
+.chain-dot {
+  animation: chain-dot 1.9s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Projection engine (futuristic calculator)
+--------------------------------------------------------------------------- */
+@keyframes chart-draw {
+  to { stroke-dashoffset: 0; }
+}
+.chart-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: chart-draw 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes area-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.area-fade {
+  opacity: 0;
+  animation: area-fade 1.1s ease 0.15s forwards;
+}
+
+input[type="range"].slider.slider-dark {
+  background-color: rgba(250, 246, 237, 0.14);
+  background-image: linear-gradient(var(--color-gold), var(--color-gold));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-win, .icon-shimmer, .icon-seal, .icon-drawline, .icon-spark,
+  .animate-marquee, .chain-dot, .chart-draw, .area-fade {
+    animation: none !important;
+  }
+  .icon-drawline { stroke-dasharray: none; }
+  .chart-draw { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .area-fade { opacity: 1; }
+}
+
+/* ---------------------------------------------------------------------------
    Range sliders
 --------------------------------------------------------------------------- */
 input[type="range"].slider {

@@ -165,6 +165,21 @@ export function Dot({ color, className }: { color: string; className?: string })
   return <span className={cx("inline-block h-2.5 w-2.5 shrink-0 rounded-full", className)} style={{ background: color }} />;
 }
 
+/** Octagonal token glyph — the Silsila blockchain motif. */
+export function Octagon({ color = "#e7c878", size = 12, filled = false }: { color?: string; size?: number; filled?: boolean }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 12 12" aria-hidden className="shrink-0">
+      <path
+        d="M4 1h4l3 3v4l-3 3H4l-3-3V4l3-3z"
+        fill={filled ? color : "none"}
+        stroke={color}
+        strokeWidth="1.3"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function Disclaimer({ text, dark }: { text: string; dark?: boolean }) {
   return <p className={cx("mt-4 text-xs leading-relaxed", dark ? "text-cream/45" : "text-ink-soft/75")}>{text}</p>;
 }

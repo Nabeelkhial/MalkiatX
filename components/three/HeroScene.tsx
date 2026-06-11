@@ -141,7 +141,7 @@ function ClusterOrbs() {
   return (
     <group>
       {CLUSTERS.map((c, i) => (
-        <Float key={i} speed={1.6} rotationIntensity={0} floatIntensity={0.6}>
+        <Float key={i} speed={1.6} rotationIntensity={0.25} floatIntensity={0.6}>
           <group position={c.pos}>
             <sprite scale={[1.9, 1.9, 1]}>
               <spriteMaterial
@@ -156,6 +156,15 @@ function ClusterOrbs() {
             <mesh>
               <sphereGeometry args={[0.13, 24, 24]} />
               <meshBasicMaterial color={c.color} />
+            </mesh>
+            {/* octagonal "token" rings — each glow is a minted, asset-backed token */}
+            <mesh rotation={[Math.PI / 2.4, 0.5, i * 0.7]}>
+              <torusGeometry args={[0.26, 0.011, 6, 8]} />
+              <meshBasicMaterial color="#e7c878" transparent opacity={0.75} />
+            </mesh>
+            <mesh rotation={[-0.4, 0.9, Math.PI / 3 + i]}>
+              <torusGeometry args={[0.36, 0.008, 6, 8]} />
+              <meshBasicMaterial color={c.color} transparent opacity={0.4} />
             </mesh>
           </group>
         </Float>

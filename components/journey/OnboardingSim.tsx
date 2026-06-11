@@ -14,13 +14,12 @@ import {
 import { formatPKR } from "@/lib/format";
 import { cx } from "@/components/ui";
 import { StarMark } from "@/components/Logo";
+import { GoalIcon } from "@/components/GoalIcon";
 import { AllocationDonut, AllocationLegend } from "@/components/charts/Allocation";
 
 export function fill(template: string, vars: Record<string, string | number>) {
   return template.replace(/\{(\w+)\}/g, (_, k: string) => String(vars[k] ?? ""));
 }
-
-const GOAL_EMOJI: Record<GoalId, string> = { hajj: "🕋", wedding: "💍", home: "🏠", wealth: "🌱" };
 
 type CnicState = "idle" | "scanning" | "scanned" | "matching" | "done";
 
@@ -244,7 +243,7 @@ export default function OnboardingSim({
                           goal === g ? "border-gold bg-gold/15" : "border-white/15 bg-white/[0.05] hover:border-gold/60"
                         )}
                       >
-                        <span className="text-2xl">{GOAL_EMOJI[g]}</span>
+                        <GoalIcon goal={g} className={cx("mx-auto", goal === g ? "text-gold-bright" : "text-mint/80")} />
                         <span className="mt-2 block text-sm font-semibold">{s.goals[g]}</span>
                       </button>
                     ))}
@@ -353,7 +352,13 @@ export default function OnboardingSim({
                   </motion.span>
                   <p className="font-display mt-6 text-2xl font-semibold">{s.successTitle}</p>
                   <p className="mt-3 max-w-[230px] text-sm text-mint/80">{s.successSub}</p>
-                  <button type="button" onClick={restart} className="btn btn-outline-light mt-9">
+                  <p className="ltr-isolate mt-5 flex items-center gap-2 rounded-lg border border-gold/30 bg-gold/10 px-3 py-2 font-mono text-[10px] text-gold-bright">
+                    <svg width="11" height="11" viewBox="0 0 12 12" aria-hidden>
+                      <path d="M4 1h4l3 3v4l-3 3H4l-3-3V4l3-3z" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
+                    </svg>
+                    0x91ae…d4f1 · ✓ Silsila
+                  </p>
+                  <button type="button" onClick={restart} className="btn btn-outline-light mt-7">
                     {s.successCta}
                   </button>
                 </div>

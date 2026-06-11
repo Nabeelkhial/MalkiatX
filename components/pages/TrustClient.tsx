@@ -186,6 +186,45 @@ export default function TrustClient() {
               </Reveal>
             ))}
           </div>
+
+          {/* on-chain proof-of-reserves explorer */}
+          <Reveal className="mt-10">
+            <div className="relative overflow-hidden rounded-3xl border border-gold/40 bg-night p-7 text-cream shadow-glow sm:p-10">
+              <Pattern className="text-gold/[0.05]" />
+              <div className="relative">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <h3 className="font-display flex items-center gap-3 text-2xl font-semibold">
+                    <svg width="22" height="22" viewBox="0 0 12 12" aria-hidden>
+                      <path d="M4 1h4l3 3v4l-3 3H4l-3-3V4l3-3z" fill="none" stroke="#e7c878" strokeWidth="1.1" strokeLinejoin="round" />
+                    </svg>
+                    {t.trust.explorer.title}
+                  </h3>
+                  <span className="chip border-cream/25 text-cream/60">{t.trust.explorer.note}</span>
+                </div>
+                <p className="mt-3 max-w-2xl text-sm text-mint/80">{t.trust.explorer.sub}</p>
+
+                <div className="mt-7 grid gap-4 sm:grid-cols-3">
+                  <ExplorerStat k={t.trust.explorer.supply} v={t.trust.explorer.supplyV} />
+                  <ExplorerStat k={t.trust.explorer.reserves} v={t.trust.explorer.reservesV} />
+                  <ExplorerStat k={t.trust.explorer.ratio} v={t.trust.explorer.ratioV} highlight />
+                </div>
+
+                <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-xl border border-white/10 bg-white/[0.04] px-5 py-4 text-xs">
+                  <p>
+                    <span className="font-bold uppercase tracking-wider text-cream/45">{t.trust.explorer.merkle}</span>
+                    <span className="ltr-isolate ms-3 font-mono text-gold-bright">{t.trust.explorer.merkleV}</span>
+                  </p>
+                  <p>
+                    <span className="font-bold uppercase tracking-wider text-cream/45">{t.trust.explorer.updated}</span>
+                    <span className="ms-3 text-mint/85">{t.trust.explorer.updatedV}</span>
+                  </p>
+                  <span className="chip ms-auto border-gold/50 text-gold-bright">
+                    {t.trust.explorer.cta} · {t.common.comingSoon}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
@@ -208,5 +247,14 @@ export default function TrustClient() {
         </div>
       </Section>
     </>
+  );
+}
+
+function ExplorerStat({ k, v, highlight }: { k: string; v: string; highlight?: boolean }) {
+  return (
+    <div className={`rounded-xl border p-5 ${highlight ? "border-gold/60 bg-gold/10" : "border-white/10 bg-white/[0.04]"}`}>
+      <p className="text-[11px] font-bold uppercase tracking-wider text-cream/50">{k}</p>
+      <p className={`ltr-isolate font-display mt-2 text-2xl font-semibold ${highlight ? "text-gold-bright" : "text-cream"}`}>{v}</p>
+    </div>
   );
 }

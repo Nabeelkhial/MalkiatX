@@ -9,6 +9,7 @@ import Pattern from "@/components/Pattern";
 import { StarMark } from "@/components/Logo";
 import GrowthCalculator from "@/components/charts/GrowthCalculator";
 import { AssetIcon } from "@/components/AssetIcon";
+import SilsilaSection from "@/components/Silsila";
 
 const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
   ssr: false,
@@ -21,6 +22,7 @@ export default function HomeClient() {
       <Hero />
       <StatsStrip />
       <AssetsSection />
+      <SilsilaSection />
       <HowSection />
       <GrowthTeaser />
       <PersonasSection />
@@ -228,7 +230,7 @@ function PersonasSection() {
         </div>
         <Reveal className="mt-10 text-center">
           <Btn href="/journey" variant="outline">
-            {t.nav.journey} ←
+            {t.nav.journey}
           </Btn>
         </Reveal>
       </div>

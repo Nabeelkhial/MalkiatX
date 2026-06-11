@@ -15,6 +15,9 @@ const AssetMini = dynamic(() => import("@/components/three/AssetMini"), {
   loading: () => null,
 });
 
+// Illustrative Silsila ledger entries shown under each tokenization step.
+const STEP_HASHES = ["0x3e9c…a1d4", "0x77b2…f08e", "0xc4d5…2b67"];
+
 export default function AssetDetailClient({ slug }: { slug: AssetSlug }) {
   const { t } = useLang();
   const d = t.assetDetail.items[slug];
@@ -90,14 +93,23 @@ export default function AssetDetailClient({ slug }: { slug: AssetSlug }) {
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {d.how.map((step, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="card relative h-full p-7">
+                <div className="card relative flex h-full flex-col p-7">
                   <span
                     className="font-display grid h-10 w-10 place-items-center rounded-full text-lg font-semibold text-white"
                     style={{ background: color }}
                   >
                     {i + 1}
                   </span>
-                  <p className="mt-4 text-sm leading-relaxed text-ink">{step}</p>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-ink">{step}</p>
+                  <p className="ltr-isolate mt-5 flex items-center justify-between border-t border-line pt-3 font-mono text-[10px] text-ink-soft/70">
+                    <span className="flex items-center gap-1.5">
+                      <svg width="10" height="10" viewBox="0 0 12 12" aria-hidden>
+                        <path d="M4 1h4l3 3v4l-3 3H4l-3-3V4l3-3z" fill="none" stroke={color} strokeWidth="1.4" strokeLinejoin="round" />
+                      </svg>
+                      {STEP_HASHES[i]}
+                    </span>
+                    <span className="font-sans font-bold text-emerald">✓ Silsila</span>
+                  </p>
                 </div>
               </Reveal>
             ))}
